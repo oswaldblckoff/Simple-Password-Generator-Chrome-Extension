@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  /* BG */
+  body {
+    font-family: 'Overpass Mono', monospace;
+    background-color: #111111;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  /* Container BG */
+  .container {
+    background-color: #111111;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px; /* Window Size */
+  }
+  
+  .password-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #D9D9D9;
+    padding: 10px;
+    width: 308px;
+    height: 45px;
+    border-radius: 10px;
+  }
+  
+  #password {
+    background-color: transparent;
+    border: none;
+    color: #111111;
+    width: 200px;
+    font-size: 21px;
+    font-family: 'Overpass Mono', monospace;
+  }
+  
+  #copy-btn {
+    background-color: #D9D9D9;
+    border: none;
+    padding: 1px;
+    border-radius: 150px;
+    cursor: pointer;
+  }
+  
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .btn {
+    background-color: #D9D9D9;
+    color: #111111;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
+    height: 36px;
+    font-size: 18px;
+    font-family: 'Overpass Mono', monospace;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .option-btn {
+    background-color: #D9D9D9;
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    margin-left: 5px;
+  }
+  
+  .option-btn img {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .option-btn.active {
+    background-color: #FF3939;
+  }
+/* Program Version Style */
+  .version {
+    position: absolute;
+    bottom: -2px;
+    left: 240px;
+    font-size: 12px;
+    color: #bbb;
+  }
