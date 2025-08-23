@@ -32,7 +32,7 @@ copyBtn.addEventListener('click', () => {
 });
 
 function generatePassword() {
-  const length = 12;
+  const length = 18;
   const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
   const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const numberChars = '0123456789';
