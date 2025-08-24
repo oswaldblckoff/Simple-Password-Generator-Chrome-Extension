@@ -46,7 +46,7 @@
     justify-content: space-between;
     background-color: var(--bg-elements-clr);
     padding: 10px;
-    width: 308px;
+    width: 100%;
     height: 45px;
     border-radius: var(--radius-size);
     transition: box-shadow 0.22s ease;
@@ -112,7 +112,7 @@
 
   /* Focus Styles */
   .btn:focus-visible, .option-btn:focus-visible, #copy-btn:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent-clr);
     outline-offset: 2px;
   }
 
@@ -151,6 +151,8 @@
   .option-btn.active {
     background-color: var(--accent-clr);
   }
+
+
 /* Program Version Style */
   .version {
     position: absolute;
@@ -160,3 +162,30 @@
     color: var(--bg-elements-clr);
     opacity: var(--txt-version-opacity);
   }
+
+  /* Copied Notification */
+  .copy-feedback {
+  /* Position */
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Visual */
+  background-color: var(--accent-clr);
+  color: var(--txt-main-clr);
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-family: var(--font-main);
+  font-size: 14px;
+
+  /* Hiding By Default */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Import JS Class */
+.copy-feedback.show {
+  opacity: 1;
+}
