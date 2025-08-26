@@ -8,13 +8,20 @@
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">   <!-- /* DotGothic16 Font Download */ -->
   <title>Password Generator</title>
 </head>
+
 <body>
   <div class="container">
     <div class="password-box">
       <input type="text" id="password" readonly>
-      <button id="copy-btn" title="Copy to Clipboard">
+      <button id="copy-btn" title="Copy to Clipboard"> 
         <img src="ico/copy-icon.png" alt="Copy">
       </button>
+    </div>
+
+    <!-- Password Length -->
+    <div class="length-control">
+      <label for="length-range">Length: <span id="length-value">18</span></label>
+      <input type="range" id="length-range" min="6" max="64" value="18">
     </div>
 
     <div class="copy-feedback">Copied!</div>   <!-- /* Copied Notification */ -->
@@ -32,16 +39,23 @@
         <button id="symbols-btn" class="option-btn active" title="SYMBOLS">
           <img src="ico/icon-symbols.png" alt="Symbols">
         </button>
-      </div>
     </div>
-  </div>
+      </div>
 
-<!-- Version Show -->
+      <!-- Last Passwords History -->
+    <div class="password-history">
+      <h4>last password:</h4>
+      <ul id="history-list"></ul>
+    </div>
+
+    <!-- Version Show -->
     <div class="version">
         Version: <span id="version"></span>
       </div>
+
     </div>
-    
+  </div>
+
   <script src="popup.js"></script>
 </body>
 </html>

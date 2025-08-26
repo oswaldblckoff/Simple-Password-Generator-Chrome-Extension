@@ -189,3 +189,52 @@
 .copy-feedback.show {
   opacity: 1;
 }
+
+/* Length visual */
+.length-control {
+  margin-top: 10px;
+  color: var(--txt-main-clr);
+  font-size: 14px;
+  font-family: var(--font-main);
+  text-align: left;
+}
+
+.length-control input[type="range"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Password History */
+.password-history {
+  width: 100%;            
+  margin-top: 10px;     
+  background-color: var(--accent-clr);
+  padding: 10px;
+  border-radius: var(--radius-size);
+  height: 50%; /* Password History Height */
+  overflow-y: auto;
+  text-align: left;
+}
+
+.password-history h4 {
+  font-family: var(--font-main);
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.password-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.password-history li {
+  font-family: var(--font-main);
+  font-size: 22px;
+  background-color: var(--bg-elements-clr);
+  color: var(--txt-dark-clr);
+  padding: 5px 10px;
+  margin-bottom: 3px;
+  border-radius: var(--radius-size);
+  word-break: break-all; /* If Password Was Long */
+}

@@ -1,15 +1,15 @@
 {
     "manifest_version": 3,
     "name": "SimplePasswordGenerator",
-    "version": "2.9",
+    "version": "3.0",
     "description": "Generate secure passwords with options for uppercase, numbers, and symbols.",
     "action": {
       "default_popup": "popup.html"
     },
     "icons": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
+      "16": "ico/icon16.png",
+      "48": "ico/icon48.png",
+      "128": "ico/icon128.png"
     },
     "permissions": []
 }
