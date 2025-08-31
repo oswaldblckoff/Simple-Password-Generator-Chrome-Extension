@@ -10,6 +10,7 @@ This is a Chrome extension for generating secure passwords with flexible setting
   - Include **symbols**
 - Quick copy to clipboard
 - History of recently copied passwords  
+- Password security meter
 
 
 ---

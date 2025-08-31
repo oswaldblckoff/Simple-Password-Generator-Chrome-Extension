@@ -11,8 +11,18 @@
 
 <body>
   <div class="container">
+
+    <!-- Password Strength Checker -->
+    <div class="strength-meter" aria-live="polite">
+      <div id="strength-label" class="strength-label">Very weak 😞</div>
+      <div class="strength-bar">
+        <div id="strength-fill" class="strength-fill level-0" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Password Box -->
     <div class="password-box">
-      <input type="text" id="password" readonly>
+      <input type="text" id="password" readonly placeholder="click generate">
       <button id="copy-btn" title="Copy to Clipboard"> 
         <img src="ico/copy-icon.png" alt="Copy">
       </button>
@@ -44,7 +54,7 @@
 
       <!-- Last Passwords History -->
     <div class="password-history">
-      <h4>last password:</h4>
+      <h4>last copied password:</h4>
       <ul id="history-list"></ul>
     </div>
 
