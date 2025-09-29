@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <!-- /* Fonts Download */ -->
   <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap" rel="stylesheet">   <!-- /* OverpassMono Font Download */ -->
-  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">   <!-- /* DotGothic16 Font Download */ -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">   <!-- /* Fira Code Font Download */ -->
+  <!-- /* İcons Download */ -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=content_copy" />
   <title>Password Generator</title>
 </head>
 
-<body>
+<body class="theme-dark">
   <div class="container">
 
     <!-- Password Strength Checker -->
@@ -24,10 +27,10 @@
     <div class="password-box">
       <input type="text" id="password" readonly placeholder="click generate">
       <button id="copy-btn" title="Copy to Clipboard"> 
-        <img src="ico/copy-icon.png" alt="Copy">
+          <span class="material-symbols-outlined">content_copy</span>
       </button>
     </div>
-
+    
     <!-- Password Length -->
     <div class="length-control">
       <label for="length-range">Length: <span id="length-value">18</span></label>
@@ -39,6 +42,7 @@
     <div class="controls">
       <button id="generate-btn" class="btn">generate</button>
       
+      <!-- /* Option Buttons */ -->
       <div class="options">
         <button id="uppercase-btn" class="option-btn active" title="UPPERCASE">
           <img src="ico/icon-uppercase.png" alt="Uppercase">
@@ -52,19 +56,25 @@
     </div>
       </div>
 
-      <!-- Last Passwords History -->
+    <!-- Last Passwords History -->
     <div class="password-history">
-      <h4>last copied password:</h4>
+      <h4>copied:</h4>
       <ul id="history-list"></ul>
+    </div>
+    
+    <div class="lines"></div>     <!-- Line Creation -->
+
+    <!-- Theme and Side Panel Toggle -->
+    <div class="theme-toggle">
+      <button id="theme-toggle" class="btn theme-btn" type="button" title="Change Theme">change theme</button>
+      <button id="mode-toggle" class="btn theme-btn" type="button" title="Open in side panel">side panel</button>
     </div>
 
     <!-- Version Show -->
     <div class="version">
         Version: <span id="version"></span>
       </div>
-
     </div>
-  </div>
 
   <script src="popup.js"></script>
 </body>

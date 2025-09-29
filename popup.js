@@ -14,6 +14,21 @@ const historyList = document.getElementById('history-list');
 // Adding Strength
 const strengthLabel = document.getElementById('strength-label');
 const strengthFill = document.getElementById('strength-fill');
+// Adding Theme
+const themeToggleBtn = document.getElementById('theme-toggle');
+// Adding Side Panel Mode
+const modeToggleBtn = document.getElementById('mode-toggle');
+const isInSidePanel = new URLSearchParams(location.search).get('sidepanel') === '1';
+let currentMode = 'popup';
+function applyModeUI(mode) {
+  currentMode = mode;
+  if (modeToggleBtn) {
+    modeToggleBtn.classList.toggle('active', mode === 'sidepanel');
+  }
+}
+if (isInSidePanel) {
+  document.body.classList.add('sidepanel');
+}
 
 let includeUppercase = true;
 let includeNumbers = true;
@@ -22,12 +37,116 @@ let passwordLength = parseInt(lengthRange.value, 10);
 let lastPasswords = []; // Pasword History Massive
 
 
+// Theme init/persist
+function applyTheme(t) {
+  const isLight = t === 'light';
+  document.body.classList.toggle('theme-light', isLight);
+  document.body.classList.toggle('theme-dark', !isLight);
+  if (themeToggleBtn) {
+    themeToggleBtn.textContent = isLight ? 'dark theme' : 'light theme';
+  }
+}
+// Side Panel
+try {
+  chrome.storage?.local?.get({ theme: 'dark', mode: 'popup' }, (res) => {
+    const themeVal = res?.theme === 'light' ? 'light' : 'dark';
+    applyTheme(themeVal);
+
+    const modeVal = res?.mode === 'sidepanel' ? 'sidepanel' : 'popup';
+    applyModeUI(modeVal);
+
+    // Switch to sidebar if currently in pop-up mode
+    if (modeVal === 'sidepanel' && !isInSidePanel) {
+      try {
+        chrome.sidePanel?.setOptions?.({
+          path: 'popup.html?sidepanel=1',
+          enabled: true
+        });
+      } catch (e) {
+        // ignore
+      }
+      try {
+        chrome.windows?.getCurrent?.({}, (win) => {
+          if (win && chrome.sidePanel?.open) {
+            chrome.sidePanel.open({ windowId: win.id });
+            window.close();
+          } else {
+            chrome.runtime?.sendMessage?.({ type: 'OPEN_SIDE_PANEL' });
+            window.close();
+          }
+        });
+      } catch (e) {
+        try { chrome.runtime?.sendMessage?.({ type: 'OPEN_SIDE_PANEL' }); } catch (_) {}
+        window.close();
+      }
+    }
+  });
+} catch (e) {
+  // Fallback without storage
+  applyTheme('dark');
+}
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', () => {
+    const current = document.body.classList.contains('theme-light') ? 'light' : 'dark';
+    const next = current === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    try {
+      chrome.storage?.local?.set({ theme: next });
+    } catch (e) {
+      // ignore if storage unavailable
+    }
+  });
+}
+
+if (modeToggleBtn) {
+  modeToggleBtn.addEventListener('click', () => {
+    const next = currentMode === 'sidepanel' ? 'popup' : 'sidepanel';
+    applyModeUI(next);
+    try {
+      chrome.storage?.local?.set({ mode: next });
+    } catch (e) {
+      // ignore storage errors
+    }
+
+    if (next === 'sidepanel' && !isInSidePanel) {
+      // Open side panel if configured
+      try {
+        chrome.sidePanel?.setOptions?.({
+          path: 'popup.html?sidepanel=1',
+          enabled: true
+        });
+      } catch (e) {
+        // ignore
+      }
+      try {
+        chrome.windows?.getCurrent?.({}, (win) => {
+          if (win && chrome.sidePanel?.open) {
+            chrome.sidePanel.open({ windowId: win.id });
+            window.close();
+          } else {
+            chrome.runtime?.sendMessage?.({ type: 'OPEN_SIDE_PANEL' });
+            window.close();
+          }
+        });
+      } catch (e) {
+        try { chrome.runtime?.sendMessage?.({ type: 'OPEN_SIDE_PANEL' }); } catch (_) {}
+        window.close();
+      }
+    }
+  });
+}
+
+// Initialize aria-pressed for option buttons
+uppercaseBtn.setAttribute('aria-pressed', includeUppercase.toString());
+numbersBtn.setAttribute('aria-pressed', includeNumbers.toString());
+symbolsBtn.setAttribute('aria-pressed', includeSymbols.toString());
+
 // Update display when moving length
 lengthRange.addEventListener('input', () => {
   passwordLength = parseInt(lengthRange.value, 10);
   lengthValue.textContent = passwordLength;
 });
-
 
 uppercaseBtn.addEventListener('click', () => {
   includeUppercase = !includeUppercase;
@@ -52,7 +171,7 @@ copyBtn.addEventListener('click', () => {
 
   // Add to history
   lastPasswords.unshift(password);
-  if (lastPasswords.length > 1) lastPasswords.pop();
+  if (lastPasswords.length > 1) lastPasswords.pop(); // Copy History Count (change length)
   updateHistoryDisplay();
   // Coping in buffer 
   navigator.clipboard.writeText(password).then(() => {
@@ -116,11 +235,11 @@ function evaluateStrength(currentPassword) {
   }
 
   let level = 0;
-  if (len >= 8) level++;
-  if (len >= 12) level++;
-  if (len >= 16) level++;
-  if (setsCount >= 2) level++;
+  if (len >= 10) level++;
+  if (len >= 14) level++;
+  if (len >= 18) level++;
   if (setsCount >= 3) level++;
+  if (setsCount >= 4) level++;
 
   if (level > 4) level = 4;
   if (level < 0) level = 0;
@@ -157,7 +276,6 @@ function updateAllStrength() {
   updateStrengthUI(level);
 }
 
-
 // Generating Password
 function generatePassword() {
   const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
@@ -182,5 +300,7 @@ function generatePassword() {
     const manifestData = chrome.runtime.getManifest();
     const versionElement = document.getElementById('version');
     versionElement.textContent = manifestData.version;
+
+    updateAllStrength();
 
 });
