@@ -20,7 +20,7 @@ This is a Chrome extension for generating secure passwords with flexible setting
 2. In Chrome, open `chrome://extensions/`.  
 3. Enable **Developer Mode**.  
 4. Click **Load Unpacked Extension** and select the project folder.  
-5. The extension icon will appear in the browser toolbar. 
+5. The extension icon will appear in the browser toolbar!
 
 
 ---
