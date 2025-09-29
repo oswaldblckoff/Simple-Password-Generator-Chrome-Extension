@@ -3,11 +3,12 @@
   --bg-elements-clr: #D9D9D9;
   --txt-main-clr: #FFFFFF;
   --txt-dark-clr: #111111;
-  --accent-clr: #FF3939;
+  --accent-clr: #ff3939;
+  --separator-clr: #ff393969;
   --radius-size: 10px;
   --box-shadow-size: 0 0 15px;
   --font-main: 'Overpass Mono', monospace;
-  --font-pixel: 'DotGothic16', sans-serif;
+  --font-password: 'Fira Code', monospace;
   --txt-version-opacity: 0.2;
   --option-button-size-x: 45px;
   --option-button-size-y: 45px;
@@ -30,6 +31,16 @@
     height: 100vh;
     margin: 0;
   }
+
+  /* Lines */
+  .lines {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--separator-clr);
+    margin: 10px 0;
+    width: 100%;
+  }
+
   /* Container BG */
   .container {
     background-color: var(--bg-main-clr);
@@ -63,13 +74,16 @@
     color: var(--txt-dark-clr);
     width: 100%; /* Changing 200px to 100% */
     font-size: 21px;
-    font-family: var(--font-main);
+    font-style:inherit;
+    font-weight: 333;
+    font-family: var(--font-password);
   }
   
   #password:focus {
     outline: none;
   }
 
+  /* Copy Button */
   #copy-btn {
     background-color: transparent;
     border: none;
@@ -79,10 +93,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    scale: 25%;
-    width: 25px;
+    width: 35px;           /* Copy Icon Width */
+    height: 35px;          /* Square Button */
   }
   
+  #copy-btn .material-symbols-outlined {
+    font-variation-settings: 
+      'wght' 400,   /* Icon Thickness */
+      'FILL' 1,
+      'GRAD' 0,
+      'opsz' 24;
+    font-size: 33px;       /* Icon Scale */
+    color: var(--bg-main-clr);           /* Icon Color */
+  }
+
   .controls {
     display: flex;
     align-items: center;
@@ -218,6 +242,7 @@
 
 .password-history h4 {
   font-family: var(--font-main);
+  font-weight: 222;
   font-size: 15px;
   margin-bottom: 5px;
 }
@@ -243,7 +268,7 @@
 .strength-meter {
   margin-top: 10px;
   margin-bottom: 10px;
-  text-align: left;
+  text-align: center; /* Align Center (Strength Meter) */
   font-family: var(--font-main);
 }
 
@@ -275,3 +300,74 @@
 .strength-fill.level-2 { background-color: #ffd347; } /* yellow */
 .strength-fill.level-3 { background-color: #5cb85c; } /* green */
 .strength-fill.level-4 { background-color: #2ecc71; } /* bright green */
+
+/* Theme Toggle Button */
+.theme-toggle {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.theme-btn {
+  min-width: 48px;
+  height: 50px;
+  padding: 4px 10px;
+  font-size: 16px;
+}
+.theme-btn.active {
+  background-color: var(--accent-clr);
+  color: #ffffff;
+}
+
+/* Light Theme */
+body.theme-light {
+  --bg-main-clr: #ffffff; 
+  --bg-elements-clr: #000000;
+  --txt-main-clr: #0b0b0b; 
+  --txt-dark-clr: #ffffff;
+  --txt-version-opacity: 1;
+}
+
+/* Checking Container BG */
+body.theme-light .container,
+body.theme-dark .container {
+  background-color: var(--bg-main-clr);
+}
+
+/* Adjust Strength for Light Theme */
+body.theme-light .strength-bar {
+  background-color: rgba(17, 17, 17, 0.15);
+}
+
+/* Side Panel */
+body.sidepanel .container {
+  width: 100%;
+  max-width: 100%;
+  padding: 16px;
+}
+
+body.sidepanel .controls {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+body.sidepanel .options {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+body.sidepanel .password-history {
+  height: auto;
+  max-height: 45vh; /* Keep History Scrollable */
+}
+
+body.sidepanel .version {
+  position: static;
+  margin-top: 8px;
+  text-align: right;
+}
+
+body.sidepanel .strength-meter {
+  margin-top: 12px;
+}

@@ -11,6 +11,8 @@ This is a Chrome extension for generating secure passwords with flexible setting
 - Quick copy to clipboard
 - History of recently copied passwords  
 - Password security meter
+- Side Panel Mode
+- Dark/Ligt Themes
 
 
 ---
